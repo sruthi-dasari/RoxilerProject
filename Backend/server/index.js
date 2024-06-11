@@ -1,7 +1,7 @@
-const express = require('express')
-const bodyParser = require(body-parser)
-const cors = require('cors')
-const sequelize = require('./models/database')
+const express = require('express');
+const bodyParser = require("body-parser");
+const cors = require('cors');
+const sequelize = require('./models/database');
 
 const app = express();
 app.use(cors())

@@ -1,32 +1,31 @@
-const {Sequelize, Datatypes} = require('sequelize')
-const sequelize = require('./database')
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('./database');
 
 const Transaction = sequelize.define('Transaction', {
     title: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     description: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     price: {
-        type: Datatypes.FLOAT,
+        type: DataTypes.FLOAT,
         allowNull: false
     },
     dateOfSale: {
-        type: Datatypes.DATE,
+        type: DataTypes.DATE,
         allowNull: false
     },
     sold: {
-        type: Datatypes.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         allowNull: false
     },
     category: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     }
+});
 
-})
-
-module.exports=Transaction;
+module.exports = Transaction;

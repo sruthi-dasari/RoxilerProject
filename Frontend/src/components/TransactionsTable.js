@@ -1,8 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const TransactionsTable = ({ transactions }) => {
+const TransactionsTable = () => {
+    const [transactions, setTransactions] = useState([]);
+    const [page, setPage] = useState(1);
+    const [search, setSearch] = useState('');
+    const [month, setMonth] = useState('March');
+
+    useEffect(() => {
+        fetchTransactions();
+    }, [page, search, month]);
+
+    const fetchTransactions = async () => {
+        const response = await axios.get('http://localhost:5000/api/transactions', {
+            params: { page, search, month }
+        });
+        setTransactions(response.data);
+    };
+
     return (
         <div>
+            <select value={month} onChange={(e) => setMonth(e.target.value)}>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                {/* Add other months */}
+            </select>
+            <input
+                type="text"
+                placeholder="Search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
             <table>
                 <thead>
                     <tr>
@@ -27,6 +56,8 @@ const TransactionsTable = ({ transactions }) => {
                     ))}
                 </tbody>
             </table>
+            <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))}>Previous</button>
+            <button onClick={() => setPage((prev) => prev + 1)}>Next</button>
         </div>
     );
 };
